@@ -1,15 +1,247 @@
-.spacer {
-    flex: 1 1 auto;
+/* Premium Toolbar Styles */
+.app-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0;
+    height: 72px;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.toolbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+}
+
+/* Brand Section */
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 32px;
 }
 
 .brand-link {
     display: flex;
     align-items: center;
-    color: inherit;
+    gap: 12px;
     text-decoration: none;
-    font-size: 1.25rem;
-    font-weight: 500;
+    color: var(--text-color);
     transition: opacity 0.2s ease;
+}
+
+.brand-link:hover {
+    opacity: 0.9;
+}
+
+.brand-logo-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    height: 36px;
+    width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.brand-logo-fallback {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fallback-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.brand-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(90deg, #fff, #cbd5e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.nav-link {
+    color: var(--text-secondary-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* Search Section */
+.search-section {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 24px;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.search-bar:focus-within {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.1);
+}
+
+.search-icon {
+    color: var(--text-secondary-color);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+.search-bar input {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    width: 100%;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Actions Section */
+.actions-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.action-link {
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.action-link:hover {
+    color: var(--accent-color);
+}
+
+/* Enhanced Profile Button */
+.profile-link {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.profile-link:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
+    color: #fff;
+}
+
+.profile-link:hover::before {
+    opacity: 1;
+}
+
+.profile-link mat-icon {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .desktop-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-toolbar {
+        height: 64px;
+    }
+
+    .toolbar-container {
+        padding: 0 16px;
+    }
+
+    .search-section {
+        display: none;
+        /* Hide standard search on mobile for now, ideally toggle */
+    }
+
+    .brand-text {
+        font-size: 1.1rem;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .brand-link:hover {
@@ -87,8 +319,9 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     padding: 0;
+    // Background is handled by mat-toolbar color="primary" or default
 }
 
 .mobile-toolbar .container {
@@ -196,12 +429,5 @@
     .brand-logo {
         image-rendering: -webkit-optimize-contrast;
         image-rendering: crisp-edges;
-    }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .brand-logo {
-        filter: brightness(0) invert(1);
     }
 }

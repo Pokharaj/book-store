@@ -20,5 +20,13 @@ export const routes: Routes = [
   {
     path: 'order-success',
     loadComponent: () => import('./features/checkout/order-success').then(m => m.OrderSuccess)
+  },
+  {
+    path: 'categories',
+    loadChildren: () => import('./features/categories/categories-module').then(m => m.CategoriesModule)
+  },
+  {
+    path: 'best-sellers',
+    loadChildren: () => import('./features/best-sellers/best-sellers-module').then(m => m.BestSellersModule)
   }
 ];

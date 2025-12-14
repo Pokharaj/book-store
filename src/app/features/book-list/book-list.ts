@@ -3,7 +3,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -18,13 +18,49 @@ import { CartService } from '../cart/cart.service';
 })
 export class BookList implements OnInit {
   books: any[] = [];
+  allBooks: any[] = [];
+  currentCategory: string = 'All';
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar, private cartService: CartService) {}
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    // Combine route params and data fetching
     this.http.get<any[]>('book_data.json').subscribe(data => {
-      this.books = data;
+      this.allBooks = data; // Store all books
+
+      this.route.queryParams.subscribe(params => {
+        const category = params['category'];
+        if (category) {
+          this.books = this.allBooks.filter(b => b.genre === category);
+          this.currentCategory = category;
+        } else {
+          this.books = this.allBooks;
+          this.currentCategory = 'All';
+        }
+      });
     });
+  }
+
+  filterBooks(category: string) {
+    if (category === 'All') {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { category: null },
+        queryParamsHandling: 'merge'
+      });
+    } else {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { category: category },
+        queryParamsHandling: 'merge'
+      });
+    }
   }
 
   onImageError(event: any) {
@@ -35,7 +71,7 @@ export class BookList implements OnInit {
       img.style.display = 'none';
       placeholder.style.display = 'flex';
     }
-    
+
     // Log the error for debugging
     console.warn('Image failed to load:', img.src);
   }

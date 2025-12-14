@@ -1,0 +1,47 @@
+<div class="best-sellers-container">
+    <header class="page-header">
+        <h1 class="page-title">Best Sellers</h1>
+        <p class="page-subtitle">The most popular books everyone is talking about right now.</p>
+    </header>
+
+    <div class="best-sellers-grid">
+        <mat-card *ngFor="let book of bestSellers; let i = index" class="bestseller-rank-card"
+            [routerLink]="['/book', book.ISBN]">
+            <div class="rank-badge">#{{ i + 1 }}</div>
+
+            <div class="book-cover-wrapper">
+                <img src="generic-book-cover.jpg" [alt]="book.title" class="book-cover" (error)="onImageError($event)"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="book-image-placeholder"
+                    style="display: none; height: 100%; align-items: center; justify-content: center; background: #333;">
+                    <mat-icon style="color: grey;">auto_stories</mat-icon>
+                </div>
+            </div>
+
+            <div class="book-info">
+                <div class="info-header">
+                    <div class="meta-left">
+                        <span class="genre-chip">{{ book.genre }}</span>
+                        <h3 class="book-title">{{ book.title }}</h3>
+                        <span class="book-author">by {{ book.author }}</span>
+                    </div>
+                </div>
+
+
+
+                <div class="footer-row">
+                    <div class="rating-row">
+                        <mat-icon class="star-icon">star</mat-icon>
+                        <span class="rating-val">{{ book.ratings.average_rating }}</span>
+                        <span class="review-count">({{ book.ratings.review_count }} reviews)</span>
+                    </div>
+
+                    <div class="price-action">
+                        <span class="price">${{ book.price.amount }}</span>
+                        <button mat-stroked-button color="accent" class="action-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

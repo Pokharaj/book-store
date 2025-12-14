@@ -1,28 +1,41 @@
-<mat-toolbar color="primary" class="mobile-toolbar">
-  <div class="container">
-    <a routerLink="/" class="brand-link" aria-label="Book Store Home">
-      <span class="brand-logo-flex">
-        <img src="assets/book_store_logo.png" 
-             alt="Book Store Logo" 
-             class="brand-logo"
-             (load)="onLogoLoad($event)"
-             (error)="onLogoError($event)"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="brand-logo-fallback" style="display: none;">
-          <mat-icon class="fallback-icon">book</mat-icon>
+<mat-toolbar color="primary" class="app-toolbar">
+  <div class="toolbar-container">
+    <div class="brand-section">
+      <a routerLink="/" class="brand-link" aria-label="Book Store Home">
+        <div class="brand-logo-wrapper">
+          <img src="assets/book_store_logo.png" alt="Book Store Logo" class="brand-logo" (load)="onLogoLoad($event)"
+            (error)="onLogoError($event)"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="brand-logo-fallback" style="display: none;">
+            <mat-icon class="fallback-icon">auto_stories</mat-icon>
+          </div>
         </div>
         <span class="brand-text">Book Store</span>
-      </span>
-    </a>
-    <span class="spacer"></span>
-    <a routerLink="/cart" 
-       [matBadge]="cartCount > 0 ? cartCount : null" 
-       matBadgeColor="accent" 
-       matBadgeOverlap="true"  
-       class="cart-link"
-       aria-label="Shopping Cart">
-      <mat-icon>shopping_cart</mat-icon>
-    </a>
+      </a>
+
+      <nav class="desktop-nav">
+        <a routerLink="/" class="nav-link">Home</a>
+        <a routerLink="/categories" class="nav-link">Categories</a>
+        <a routerLink="/best-sellers" class="nav-link">Best Sellers</a>
+      </nav>
+    </div>
+
+    <div class="search-section">
+      <div class="search-bar">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input type="text" placeholder="Search for books, authors..." aria-label="Search">
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <a routerLink="/cart" [matBadge]="cartCount > 0 ? cartCount : null" matBadgeColor="accent" matBadgeOverlap="true"
+        class="action-link cart-link" aria-label="Shopping Cart">
+        <mat-icon>shopping_cart</mat-icon>
+      </a>
+      <button mat-icon-button class="action-link profile-link" aria-label="Sign In">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
   </div>
 </mat-toolbar>
 
