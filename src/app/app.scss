@@ -80,6 +80,12 @@
     -webkit-text-fill-color: transparent;
 }
 
+/* Mobile Menu Button - Hidden by default on desktop */
+.mobile-menu-btn {
+    display: none;
+    color: var(--text-color);
+}
+
 /* Desktop Navigation */
 .desktop-nav {
     display: flex;
@@ -210,6 +216,16 @@
 @media (max-width: 900px) {
     .desktop-nav {
         display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        margin-left: -8px;
+        /* Offset internal padding */
+    }
+
+    .brand-section {
+        gap: 12px;
     }
 }
 
