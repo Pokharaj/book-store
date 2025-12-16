@@ -1,6 +1,10 @@
 <mat-toolbar color="primary" class="app-toolbar">
   <div class="toolbar-container">
     <div class="brand-section">
+      <!-- Mobile Menu Button -->
+      <button mat-icon-button class="mobile-menu-btn" [matMenuTriggerFor]="mobileMenu" aria-label="Open Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
       <a routerLink="/" class="brand-link" aria-label="Book Store Home">
         <div class="brand-logo-wrapper">
           <img src="assets/book_store_logo.png" alt="Book Store Logo" class="brand-logo" (load)="onLogoLoad($event)"
@@ -12,6 +16,21 @@
         </div>
         <span class="brand-text">Book Store</span>
       </a>
+
+      <mat-menu #mobileMenu="matMenu">
+        <a mat-menu-item routerLink="/">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </a>
+        <a mat-menu-item routerLink="/categories">
+          <mat-icon>category</mat-icon>
+          <span>Categories</span>
+        </a>
+        <a mat-menu-item routerLink="/best-sellers">
+          <mat-icon>trending_up</mat-icon>
+          <span>Best Sellers</span>
+        </a>
+      </mat-menu>
 
       <nav class="desktop-nav">
         <a routerLink="/" class="nav-link">Home</a>

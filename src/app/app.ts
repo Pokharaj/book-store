@@ -4,6 +4,8 @@ import { filter } from 'rxjs/operators';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
@@ -13,7 +15,7 @@ import { SearchService } from './shared/services/search.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, MatToolbarModule, MatIconModule, MatBadgeModule, CommonModule],
+  imports: [RouterOutlet, RouterModule, MatToolbarModule, MatIconModule, MatBadgeModule, CommonModule, MatMenuModule, MatButtonModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
