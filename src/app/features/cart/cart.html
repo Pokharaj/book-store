@@ -7,8 +7,8 @@
 
   <mat-divider class="cart-divider"></mat-divider>
   <div class="cart-content">
-    <mat-list *ngIf="cartItems.length > 0; else emptyCart" class="cart-list">
-      <mat-list-item *ngFor="let item of cartItems; let last = last; let i = index" class="cart-item">
+    <div *ngIf="cartItems.length > 0; else emptyCart" class="cart-list">
+      <div *ngFor="let item of cartItems; let last = last; let i = index" class="cart-item">
         <div class="cart-item-content">
           <div class="item-info">
             <mat-icon class="cart-book-icon" color="primary">menu_book</mat-icon>
@@ -37,9 +37,8 @@
             </div>
           </div>
         </div>
-        <mat-divider *ngIf="!last" class="item-divider"></mat-divider>
-      </mat-list-item>
-    </mat-list>
+      </div>
+    </div>
 
     <ng-template #emptyCart>
       <div class="empty-cart">

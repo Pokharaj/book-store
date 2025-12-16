@@ -1,0 +1,1 @@
+import{U as c,k as t}from"./chunk-2AP2YPDH.js";var a=class e{searchTermSubject=new t("");searchTerm$=this.searchTermSubject.asObservable();constructor(){}setSearchTerm(r){this.searchTermSubject.next(r)}static \u0275fac=function(o){return new(o||e)};static \u0275prov=c({token:e,factory:e.\u0275fac,providedIn:"root"})};export{a};

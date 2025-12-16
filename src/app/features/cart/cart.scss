@@ -102,7 +102,7 @@
   width: 32px;
   height: 32px;
   flex-shrink: 0;
-  margin-top: 4px;
+  /* margin-top: 4px; REMOVED to fix specific alignment issue */
 }
 
 .item-details {

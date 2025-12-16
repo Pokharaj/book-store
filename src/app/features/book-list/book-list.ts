@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CartService } from '../cart/cart.service';
+import { SearchService } from '../../shared/services/search.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-book-list',
@@ -26,22 +28,39 @@ export class BookList implements OnInit {
     private snackBar: MatSnackBar,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private searchService: SearchService
   ) { }
 
   ngOnInit() {
-    // Combine route params and data fetching
+    // Combine route params, search term, and data fetching
     this.http.get<any[]>('book_data.json').subscribe(data => {
       this.allBooks = data; // Store all books
 
-      this.route.queryParams.subscribe(params => {
+      // Subscribe to both route params and search term changes
+      combineLatest([
+        this.route.queryParams,
+        this.searchService.searchTerm$
+      ]).subscribe(([params, searchTerm]) => {
         const category = params['category'];
+        this.currentCategory = category || 'All';
+
+        // Filter by category first
+        let filteredBytes = this.allBooks;
         if (category) {
-          this.books = this.allBooks.filter(b => b.genre === category);
-          this.currentCategory = category;
+          filteredBytes = this.allBooks.filter(b => b.genre === category);
+        }
+
+        // Then filter by search term, case-insensitive
+        const trimmedTerm = searchTerm ? searchTerm.trim() : '';
+        if (trimmedTerm) {
+          const lowerTerm = trimmedTerm.toLowerCase();
+          this.books = filteredBytes.filter(b =>
+            (b.title && b.title.toLowerCase().includes(lowerTerm)) ||
+            (b.author && b.author.toLowerCase().includes(lowerTerm))
+          );
         } else {
-          this.books = this.allBooks;
-          this.currentCategory = 'All';
+          this.books = filteredBytes;
         }
       });
     });

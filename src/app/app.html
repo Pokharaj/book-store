@@ -20,10 +20,10 @@
       </nav>
     </div>
 
-    <div class="search-section">
+    <div class="search-section" *ngIf="showSearch">
       <div class="search-bar">
         <mat-icon class="search-icon">search</mat-icon>
-        <input type="text" placeholder="Search for books, authors..." aria-label="Search">
+        <input type="text" placeholder="Search for books, authors..." aria-label="Search" (input)="onSearch($event)">
       </div>
     </div>
 
